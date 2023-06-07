@@ -35,6 +35,7 @@ def tally_port_traffic():
 
     Returns:
         dict: Dictionary of destination port number counts
+    """
 
     dpt_logs = log_analysis_lib.filter_log_by_regex(log_path, r'DPT=(.+?) ')[1]
 
