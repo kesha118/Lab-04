@@ -8,7 +8,9 @@ Usage:
 Parameters:
  log_path = Path of the gateway log file
 """
+
 import log_analysis_lib
+
 import pandas as pd 
 # Get the log file path from the command line
 # Because this is outside of any function, log_path is a global variable
@@ -71,7 +73,14 @@ def generate_invalid_user_report():
     """
     # TODO: Complete function body per step 10
     # Get data from records that show attempted invalid user login
+    data = log_analysis_lib.filter_log_by_regex(log_path, r'invalid_user_regex_here')[1]
+
     # Generate the CSV report
+
+    df = pd.DataFrame(data)
+    csv_filename = "invalid_user_report.csv"
+    headings = ("Invalid User")
+    df.to.csv(csv_filename, index = False, header=headings)
     return
 
 def generate_source_ip_log(ip_address):
@@ -83,6 +92,13 @@ def generate_source_ip_log(ip_address):
     """
     # TODO: Complete function body per step 11
     # Get all records that have the specified sourec IP address
+    data = log_analysis_lib.filter_log_by_regex(log_path, rf'^.+\d+ .{{8}}.*SRC={ip_address} ')[0]
+    
+    # Save all records to a plain text .log file
+    df = pd.DataFrame(data)
+    csv_filename = f"source_ip_{ip_address}_log.log"
+    df.to.csv(csv_filename, header = None, index = None )
+
     # Save all records to a plain text .log file
     return
 
