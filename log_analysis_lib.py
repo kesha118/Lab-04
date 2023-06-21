@@ -21,15 +21,12 @@ def main():
     df = pd.DataFrame(captures)
     df.to_csv('capture.csv',index=False, header=('Source IP', 'Destination IP', 'Length'))
 
-    
     return
 
 def get_file_path_from_cmd_line(param_num=1):
     """Gets a file path from a command line parameter.
     
-    """
-
-   
+    """   
     # TODO: Implement the function body per Step 3
 
     num_params = len(sys.argv) - 1
